@@ -28,7 +28,7 @@ public class Permissao {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "permissao_seq")
 	private Long id;
 	
-	@NotEmpty(message = "Descrição é obrigatória")
+	@NotEmpty
 	@Size(min = 3, max = 80)
 	private String descricao;
 
