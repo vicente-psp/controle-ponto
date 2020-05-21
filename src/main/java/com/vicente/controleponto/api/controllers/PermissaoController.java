@@ -42,14 +42,14 @@ public class PermissaoController implements GenericsOperationsController<Permiss
 	}
 	
 	@GetMapping("/{id}")
-	@ApiOperation(value = "Retorna um usuário")
+	@ApiOperation(value = "Retorna uma permissão")
 	@Override
 	public ResponseEntity<Permissao> get(@PathVariable Long id) {
 		return ResponseEntity.ok(service.find(id));
 	}
 
 	@PostMapping
-	@ApiOperation(value = "Insere um usuário")
+	@ApiOperation(value = "Insere uma permissão")
 	@Override
 	public ResponseEntity<Permissao> post(@Valid @RequestBody Permissao entity, HttpServletResponse response) {
 		Permissao savedEntity = service.insert(entity);
@@ -58,7 +58,7 @@ public class PermissaoController implements GenericsOperationsController<Permiss
 	}
 
 	@PutMapping("/{id}")
-	@ApiOperation(value = "Atualiza um usuário")
+	@ApiOperation(value = "Atualiza uma permissão")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	@Override
 	public void put(@Valid @RequestBody Permissao entity, @PathVariable Long id) {
@@ -66,7 +66,7 @@ public class PermissaoController implements GenericsOperationsController<Permiss
 	}
 
 	@DeleteMapping("/{id}")
-	@ApiOperation(value = "Remove um usuário")
+	@ApiOperation(value = "Remove uma permissão")
 	@Override
 	public void delete(@PathVariable Long id) {
 		service.delete(id);
