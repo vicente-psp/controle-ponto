@@ -41,19 +41,19 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_seq")
 	private Long id;
 	
-	@NotEmpty(message = "Nome é obrigatório")
-	@Size(min = 3, max = 150, message = "Nome deve ter entre {min} e {max} caracteres")
+	@NotEmpty
+	@Size(min = 3, max = 150)
 	private String nome;
 	
-	@Size(min = 6, max = 150, message = "Email deve ter entre {min} e {max} caracteres")
+	@Size(min = 6, max = 150)
 	@Email(message = "Email inválido")
 	private String email;
 	
-	@NotEmpty(message = "Senha é obrigatória")
-	@Size(min = 6, max = 200, message = "Nome deve ter entre {min} e {max} caracteres")
+	@NotEmpty
+	@Size(min = 6, max = 200)
 	private String senha;
 	
-	@NotNull(message = "Tipo usuário é obrigatório")
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private TipoUsuario tipoUsuario;
 	
