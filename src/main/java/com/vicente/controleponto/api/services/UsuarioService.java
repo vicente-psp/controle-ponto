@@ -13,6 +13,7 @@ import com.vicente.controleponto.api.generics.GenericsOperationsService;
 import com.vicente.controleponto.api.models.Permissao;
 import com.vicente.controleponto.api.models.Usuario;
 import com.vicente.controleponto.api.repositories.UsuarioRepository;
+import com.vicente.controleponto.api.utils.UtilMethods;
 
 
 @Service
@@ -36,12 +37,14 @@ public class UsuarioService implements GenericsOperationsService<Usuario> {
 
 	@Override
 	public Usuario insert(Usuario entity) {
+		entity.setSenha(UtilMethods.passwordEncoder(entity.getSenha()));
 		return repository.save(entity);
 	}
 
 	@Override
 	public void update(Usuario entity, Long id) {
 		Usuario usuario = find(id);
+		entity.setSenha(UtilMethods.passwordEncoder(entity.getSenha()));
 		BeanUtils.copyProperties(entity, usuario, "id");
 		repository.save(usuario);
 	}
