@@ -2,7 +2,7 @@ package com.vicente.controleponto.api.models.enums;
 
 public enum TipoUsuario {
 	
-	COL("Colaborador"), ENT("Empregador"), COM("Comum");
+	COL("Colaborador"), ENT("Empregador"), COM("Comum"), ADM("Administrador");
 	
 	private String descricao;
 	
