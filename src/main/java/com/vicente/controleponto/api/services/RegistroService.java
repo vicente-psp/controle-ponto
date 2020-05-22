@@ -6,11 +6,13 @@ import java.util.Optional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
 
 import com.vicente.controleponto.api.generics.GenericsOperationsService;
 import com.vicente.controleponto.api.models.Registro;
 import com.vicente.controleponto.api.repositories.RegistroRepository;
 
+@Service
 public class RegistroService implements GenericsOperationsService<Registro> {
 	
 	@Autowired RegistroRepository repository;
