@@ -30,7 +30,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/usuarios")
-@Api(value = "Usuários")
+@Api(value = "Usuários", description = "Usuários")
 public class UsuarioController implements GenericsOperationsController<Usuario> {
 
 	@Autowired UsuarioService service;
@@ -75,7 +75,7 @@ public class UsuarioController implements GenericsOperationsController<Usuario> 
 	}
 	
 	@PutMapping("/adicionar-permissao/{idUsuario}/{idPermissao}")
-	@ApiOperation(value = "Adiciona uma permissão para um usuário")
+	@ApiOperation(value = "Adiciona permissão para um usuário")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void addPermission(@PathVariable Long idUsuario, @PathVariable Long idPermissao) {
 		service.insertPermission(idPermissao, idUsuario);
@@ -83,7 +83,7 @@ public class UsuarioController implements GenericsOperationsController<Usuario> 
 	
 	@DeleteMapping("/remove-permissao/{idUsuario}/{idPermissao}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	@ApiOperation(value = "Exclui uma permissão de um usuário")
+	@ApiOperation(value = "Exclui permissão de um usuário")
 	public void deletePermission(@PathVariable Long idUsuario, @PathVariable Long idPermissao) throws Exception {
 		service.deletePermission(idPermissao, idUsuario);
 	}

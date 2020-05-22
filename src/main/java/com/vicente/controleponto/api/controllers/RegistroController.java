@@ -29,7 +29,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/registros")
-@Api(value = "Registros")
+@Api(value = "Registros", description = "Registros de ponto")
 public class RegistroController implements GenericsOperationsController<Registro> {
 	
 	@Autowired RegistroService service;

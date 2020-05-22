@@ -29,7 +29,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/permissoes")
-@Api(value = "Permissões")
+@Api(value = "Permissões", description = "Permissões de usuários")
 public class PermissaoController implements GenericsOperationsController<Permissao> {
 
 	@Autowired PermissaoService service;
