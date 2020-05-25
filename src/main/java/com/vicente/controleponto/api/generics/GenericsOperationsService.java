@@ -1,8 +1,5 @@
 package com.vicente.controleponto.api.generics;
 
-import javax.servlet.http.HttpServletResponse;
-
-
 public interface GenericsOperationsService<E> {
 	
 	E find(Long id);
