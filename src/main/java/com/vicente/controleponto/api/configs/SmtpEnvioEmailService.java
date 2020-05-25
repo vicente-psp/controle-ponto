@@ -38,9 +38,11 @@ public class SmtpEnvioEmailService implements EnvioEmailService {
 			
 			
 			// linhas abaixo apenas para testes de envio de email com anexo
+			/*
 			String filePath = "C:/Users/vicen/OneDrive/Imagens/memes/EMVfkdLW4AAsF1D.jpg";
 			FileSystemResource file = new FileSystemResource(new File(filePath).getCanonicalPath());
 			helper.addAttachment("ibage.jpg", file);
+			*/
 			
 			
 			javaMailSender.send(mimeMessage);
