@@ -1,7 +1,9 @@
 package com.vicente.controleponto.api.models;
 
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -18,6 +20,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.vicente.controleponto.api.models.enums.TipoUsuario;
 
 import lombok.AllArgsConstructor;
@@ -45,10 +49,12 @@ public class Usuario {
 	@Size(min = 3, max = 150)
 	private String nome;
 	
-	@Size(min = 6, max = 150)
-	@Email(message = "Email inválido")
+	@NotEmpty
+	@Email
 	private String email;
 	
+	@Getter(onMethod = @__({@JsonIgnore}))
+  @Setter(onMethod = @__({@JsonProperty}))
 	@NotEmpty
 	@Size(min = 6, max = 200)
 	private String senha;
@@ -62,5 +68,14 @@ public class Usuario {
 		joinColumns = @JoinColumn(name = "usuario_id"),
 		inverseJoinColumns = @JoinColumn(name = "permissao_id"))
 	private List<Permissao> permissoes;
+	
+	@Column(insertable = false)
+	private Date dataInclusao;
+	
+	@Column(insertable = false)
+	private Date dataAlteracao;
+	
+	@Column(insertable = false)
+	private Boolean ativo;
 
 }
