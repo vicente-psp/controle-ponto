@@ -30,49 +30,67 @@ public class UsuarioService implements GenericsOperationsService<Usuario> {
 	@Autowired private SolicitacaoCadastroService solicitacaoCadastroService;
 
 	public void solicitarCadastro(Usuario entity) {
-		if (entity.getId() != null && entity.getId() > 0) {
-			Optional<Usuario> optional = repository.findById(entity.getId());
-			if (optional.isPresent()) {
-				throw new DataIntegrityViolationException("Usuário já cadastrado");
-			}
+		Optional<Usuario> optional = repository.findByEmail(entity.getEmail());
+		if (optional.isPresent()) {
+			throw new DataIntegrityViolationException("Usuário já cadastrado");
 		}
+		if (entity.getId() != null && entity.getId() > 0) {
+			throw new DataIntegrityViolationException("Operação não permitida");
+		}
+		
 		if (entity.getTipoUsuario() == TipoUsuario.ADM) {
 			throw new DataIntegrityViolationException("Tipo de usuário não permitido");
 		}
 		entity.setSenha(UtilMethods.passwordEncoder(entity.getSenha()));
 		Usuario savedEnity = repository.save(entity);
 
-		String generateRandomPassword = UtilMethods.generateRandomPassword();
+		String secretKey = UtilMethods.generateRandomPassword();
 		SolicitacaoCadastro solicitacaoCadastro = SolicitacaoCadastro.builder()
 																								.usuario(savedEnity)
-																								.secretKey(generateRandomPassword)
+																								.secretKey(secretKey)
 																							.build();
 		solicitacaoCadastroService.insert(solicitacaoCadastro);
 		
 		Mensagem mensagem = Mensagem.builder()
 				.assunto("Meu Controle - confirmar de cadastro")
 				.corpo("email-confirmar.html")
-				.variavel("secretKey", generateRandomPassword)
+				.variavel("secretKey", secretKey)
 				.destinatario(entity.getEmail())
 				.build();
 		envioEmailService.enviar(mensagem);
-
 	}
 
 	public void confirmarCadastro(Long idUsuario, String secretKey) {
-		Usuario usuario = find(idUsuario);
-		System.out.println("idUsuario => " + idUsuario);
-		System.out.println("secretKey => " + secretKey);
-		
+		Usuario usuario = find(idUsuario);		
 		SolicitacaoCadastro solicitacaoCadastro = solicitacaoCadastroService.findByUsuario(usuario);
 		if (solicitacaoCadastro.getSecretKey().equals(secretKey)) {
 			usuario.setAtivo(true);
 			update(usuario, idUsuario);
-			
 			solicitacaoCadastroService.delete(solicitacaoCadastro.getId());
 		} else {
 			throw new DataIntegrityViolationException("Chave informada não confere");
 		}
+	}
+
+	public void reenviarSolicitacaoCadastro(String email) {
+		Optional<Usuario> optional = repository.findByEmail(email);
+		if (!optional.isPresent()) {
+			throw new EmptyResultDataAccessException(1);
+		}
+		Usuario usuario = optional.get();
+
+		String secretKey = UtilMethods.generateRandomPassword();
+		SolicitacaoCadastro solicitacaoCadastro = solicitacaoCadastroService.findByUsuario(usuario);
+		solicitacaoCadastro.setSecretKey(secretKey);
+		solicitacaoCadastroService.update(solicitacaoCadastro, solicitacaoCadastro.getId());
+		
+		Mensagem mensagem = Mensagem.builder()
+				.assunto("Meu Controle - confirmar de cadastro")
+				.corpo("email-confirmar.html")
+				.variavel("secretKey", secretKey)
+				.destinatario(usuario.getEmail())
+				.build();
+		envioEmailService.enviar(mensagem);
 	}
 
 	public List<Usuario> findAll() {

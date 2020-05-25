@@ -52,6 +52,13 @@ public class UsuarioController implements GenericsOperationsController<Usuario> 
 		service.confirmarCadastro(idUsuario, secretKey);
 	}
 	
+	@PostMapping("/reenviar-confirmacao-cadastro")
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	@ApiOperation(value = "Confirma um cadastro de um usuário passando uma chave secreta que foi enviado ao email do usuário sem precisar estar autenticado")
+	public void reenviarConfirmacaoCadastro(@RequestParam String email) {
+		service.reenviarSolicitacaoCadastro(email);
+	}
+	
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_USUARIO') and #oauth2.hasScope('read')")
 	@GetMapping
 	@ApiOperation(value = "Retorna uma lista de usuários")
