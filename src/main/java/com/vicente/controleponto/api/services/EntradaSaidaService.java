@@ -16,6 +16,7 @@ import com.vicente.controleponto.api.repositories.EntradaSaidaRepository;
 public class EntradaSaidaService implements GenericsOperationsService<EntradaSaida> {
 	
 	@Autowired EntradaSaidaRepository repository;
+	@Autowired RegistroService registroService;
 	
 	public List<EntradaSaida> findAll() {
 		return repository.findAll();
@@ -32,11 +33,19 @@ public class EntradaSaidaService implements GenericsOperationsService<EntradaSai
 
 	@Override
 	public EntradaSaida insert(EntradaSaida entity) {
+		if (entity.getRegistro().getId() == null || entity.getRegistro().getId() <= 0) {
+			throw new EmptyResultDataAccessException(1);
+		}
+		registroService.find(entity.getRegistro().getId());
 		return repository.save(entity);
 	}
 
 	@Override
 	public void update(EntradaSaida entity, Long id) {
+		if (entity.getRegistro().getId() == null || entity.getRegistro().getId() <= 0) {
+			throw new EmptyResultDataAccessException(1);
+		}
+		registroService.find(entity.getRegistro().getId());
 		EntradaSaida usuario = find(id);
 		BeanUtils.copyProperties(entity, usuario, "id");
 		repository.save(usuario);
