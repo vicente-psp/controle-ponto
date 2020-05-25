@@ -31,15 +31,15 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.inMemory()
-						.withClient("app-controle-ponto-web")
-						.secret("$2a$10$cfxtlSoRn5PUSjjen0MxIeyUvdBOgPeRV.yD9.J2kFnfjK0YPQ4UG")
+						.withClient("app-controleponto-web")
+						.secret("$2a$10$JrTw0z9q/PcmZbAuz6i0hu8.e/o55DNaOlHwq7lDQzczM/zXLs756")
 						.scopes("read", "write")
 						.authorizedGrantTypes("password", "refresh_token")
 						.accessTokenValiditySeconds(1800)
 						.refreshTokenValiditySeconds(3600 * 24)
 					.and()
-					.withClient("app-controle-ponto-mobile")
-					.secret("$2a$10$sgLEXMQAdcd8aWRZc80SV.prd1iaGfZy0jE2iod1pa3chAjBco89W")
+					.withClient("app-controleponto-mobile")
+					.secret("$2a$10$/ryk4Zr7zygX4UU/y2BHqekG0UrR5x3Ksd13IAaGUVg.19IfhXgaa")
 					.scopes("read")
 					.authorizedGrantTypes("password", "refresh_token")
 					.accessTokenValiditySeconds(1800)
@@ -66,7 +66,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Bean
 	public JwtAccessTokenConverter accessTokenConverter() {
 		JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
-		accessTokenConverter.setSigningKey("appentrega");
+		accessTokenConverter.setSigningKey("controleponto");
 		return accessTokenConverter;
 	}
 
