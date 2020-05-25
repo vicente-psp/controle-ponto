@@ -68,6 +68,7 @@ public class RegistroController implements GenericsOperationsController<Registro
 
 	@DeleteMapping("/{id}")
 	@ApiOperation(value = "Remove um registro")
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	@Override
 	public void delete(@PathVariable Long id) {
 		service.delete(id);

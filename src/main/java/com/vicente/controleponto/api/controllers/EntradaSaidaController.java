@@ -67,6 +67,7 @@ public class EntradaSaidaController implements GenericsOperationsController<Entr
 
 	@DeleteMapping("/{id}")
 	@ApiOperation(value = "Remove uma entrada saída")
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	@Override
 	public void delete(@PathVariable Long id) {
 		service.delete(id);

@@ -67,6 +67,7 @@ public class PermissaoController implements GenericsOperationsController<Permiss
 
 	@DeleteMapping("/{id}")
 	@ApiOperation(value = "Remove uma permissão")
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	@Override
 	public void delete(@PathVariable Long id) {
 		service.delete(id);
