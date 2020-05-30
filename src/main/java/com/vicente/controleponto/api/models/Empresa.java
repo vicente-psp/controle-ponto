@@ -38,7 +38,7 @@ public class Empresa {
 	@Size(min = 3, max = 150)
 	private String razaoSocial;
 	
-	
+	@NotEmpty
 	private String cnpj;
 	
 
