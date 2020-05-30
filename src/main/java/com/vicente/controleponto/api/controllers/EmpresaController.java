@@ -20,27 +20,34 @@ public class EmpresaController implements GenericsOperationsController<Empresa> 
 	@Autowired EmpresaService service;
 	@Autowired ApplicationEventPublisher publisher;
 	
+	@GetMapping
+	@ApiOperation(value = "Retorna uma lista de empresas")
+	public ResponseEntity<List<Empresa>> find() {
+		return ResponseEntity.ok(service.findAll());
+	}
+	
 	@Override
-	public ResponseEntity<Empresa> get(Long id) {
-		// TODO Auto-generated method stub
+	public ResponseEntity<Empresa> get(@PathVariable Long id) {
+		return ResponseEntity.ok(service.find(id));
 		return null;
 	}
 
 	@Override
-	public ResponseEntity<Empresa> post(Empresa entity, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResponseEntity<Empresa> post(@Valid @RequestBody Empresa entity, HttpServletResponse response) {
+		Empresa savedEntity = service.insert(entity);
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, savedEntity.getId()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(savedEntity);
 	}
 
 	@Override
-	public void put(Empresa entity, Long id) {
-		// TODO Auto-generated method stub
+	public void put(@Valid @RequestBody Empresa entity,@PathVariable Long id) {
+		service.update(entity, id);
 		
 	}
 
 	@Override
-	public void delete(Long id) {
-		// TODO Auto-generated method stub
+	public void delete(@PathVariable Long id) {
+		service.delete(id);
 		
 	}
 
