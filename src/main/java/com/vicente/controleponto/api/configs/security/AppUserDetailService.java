@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.vicente.controleponto.api.models.Usuario;
 import com.vicente.controleponto.api.repositories.UsuarioRepository;
 
+
 @Service
 public class AppUserDetailService implements UserDetailsService {
 
