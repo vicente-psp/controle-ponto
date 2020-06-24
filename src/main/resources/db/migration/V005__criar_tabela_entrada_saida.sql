@@ -6,7 +6,8 @@ CREATE TABLE IF NOT EXISTS entrada_saida (
 	registro_id INTEGER NOT NULL,
 	entrada TIME NOT NULL DEFAULT CURRENT_TIME,
 	saida TIME,
-	CONSTRAINT fk_entrada_saida_registro FOREIGN KEY (registro_id) REFERENCES registro(id)
+	CONSTRAINT fk_entrada_saida_registro FOREIGN KEY (registro_id) REFERENCES registro(id),
+	CONSTRAINT pk_entrada_saida PRIMARY KEY (id)
 );
 
 /*
