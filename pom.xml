@@ -17,6 +17,21 @@
 	<properties>
 		<java.version>13</java.version>
 	</properties>
+	
+	<developers>
+        <developer>
+            <id>vicente</id>
+            <name>Vicente Silva</name>
+            <email>vicente.pspenha@gmail.com</email>
+            <url>https://www.linkedin.com/in/vicente-psp/</url>
+        </developer>
+        <developer>
+            <id>mateus</id>
+            <name>Mateus</name>
+            <email>mateus@controleponto.com.br</email>
+            <url></url>
+        </developer>
+    </developers>
 
 	<dependencies>
 		<dependency>
