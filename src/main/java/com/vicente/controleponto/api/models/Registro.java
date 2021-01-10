@@ -1,6 +1,7 @@
 package com.vicente.controleponto.api.models;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +48,12 @@ public class Registro {
 	@ManyToOne
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
+	
+	/*
+	@Temporal(TemporalType.TIME)
+	@JsonFormat(pattern = "HH:mm:ss")
+	*/
+	private LocalTime totalHoras;
 	
 	@Getter(onMethod = @__({@JsonIgnore}))
   @OneToMany(mappedBy = "registro")
