@@ -1,6 +1,4 @@
-/*
-script para criar tabela usuario_permissao
-*/
+/* script para criar tabela usuario_permissao */
 CREATE TABLE IF NOT EXISTS usuario_permissao (
 	usuario_id INTEGER NOT NULL,
 	permissao_id INTEGER NOT NULL,
@@ -10,9 +8,7 @@ CREATE TABLE IF NOT EXISTS usuario_permissao (
 );
 
 
-/*
-script para inserir permissões para usuario 1 (Admin)
-*/
+/* script para inserir permissões para usuario 1 (Admin) */
 INSERT INTO usuario_permissao (usuario_id, permissao_id)
 	VALUES
 		(1, 1),
@@ -20,4 +16,19 @@ INSERT INTO usuario_permissao (usuario_id, permissao_id)
 		(1, 3),
 		(1, 4),
 		(1, 5),
-		(1, 6);
+		(1, 6),
+		(1, 7),
+		(1, 8),
+		(1, 9),
+		(1, 10),
+		(1, 11),
+		(1, 12),
+		(1, 13),
+		(1, 14),
+		(1, 15),
+		(1, 16),
+		(1, 17),
+		(1, 18),
+		(1, 19),
+		(1, 20),
+		(1, 21);
