@@ -1,6 +1,6 @@
 package com.vicente.controleponto.api.models;
 
-import java.util.Date;
+import java.time.LocalTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,13 +43,17 @@ public class EntradaSaida {
 	@JoinColumn(name = "registro_id")
 	private Registro registro;
 	
+	/*
+	@Temporal(TemporalType.TIME)
+	@JsonFormat(pattern = "HH:mm:ss")
+	*/
 	@NotNull
-	@Temporal(TemporalType.TIME)
-	@JsonFormat(pattern = "HH:mm:ss")
-	private Date entrada;
+	private LocalTime entrada;
 	
+	/*
 	@Temporal(TemporalType.TIME)
 	@JsonFormat(pattern = "HH:mm:ss")
-	private Date saida;
+	*/
+	private LocalTime saida;
 
 }
