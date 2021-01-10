@@ -2,7 +2,7 @@ package com.vicente.controleponto.api.models.enums;
 
 public enum TipoPessoa {
 	
-	CONTRATANTE("Contratante"), CONTRATADO("Contratado"), AUTONOMO("Autônomo");
+	CONTRATADO("Contratado"), AUTONOMO("Autônomo");
 	
 	private String descricao;
 	
