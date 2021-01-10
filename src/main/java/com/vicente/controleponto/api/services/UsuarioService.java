@@ -117,7 +117,6 @@ public class UsuarioService implements GenericsOperationsService<Usuario> {
 		Usuario usuario = find(id);
 		entity.setSenha(UtilMethods.passwordEncoder(entity.getSenha()));
 		BeanUtils.copyProperties(entity, usuario, "id");
-		usuario.setDataAlteracao(new Date());
 		repository.save(usuario);
 	}
 
