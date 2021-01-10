@@ -2,6 +2,7 @@ package com.vicente.controleponto.api.utils;
 
 import java.beans.PropertyDescriptor;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
 
@@ -10,8 +11,12 @@ import javax.mail.internet.InternetAddress;
 
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.StringUtils;
+
+import com.vicente.controleponto.api.configs.security.UsuarioSistema;
+import com.vicente.controleponto.api.models.Usuario;
 
 public class UtilMethods {
 
@@ -91,6 +96,14 @@ public class UtilMethods {
 		return (pos >= 48 && pos <= 57)
 					|| (pos >= 65 && pos <= 90)
 					|| (pos >= 97 && pos <= 122);
+	}
+	
+	public static Optional<Usuario> getUsuarioLogado() {
+		UsuarioSistema user = (UsuarioSistema) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (user != null && user.getUsuario() != null) {
+			return Optional.of(user.getUsuario());
+		}
+		return Optional.of(null);
 	}
 
 }
