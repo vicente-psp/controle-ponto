@@ -54,7 +54,7 @@ public class UsuarioController implements GenericsOperationsController<Usuario> 
 	
 	@PostMapping("/reenviar-confirmacao-cadastro")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	@ApiOperation(value = "Confirma um cadastro de um usuário passando uma chave secreta que foi enviado ao email do usuário sem precisar estar autenticado")
+	@ApiOperation(value = "Reenvia confirmação de um cadastro de um usuário enviando uma chave secreta ao email do usuário sem precisar estar autenticado")
 	public void reenviarConfirmacaoCadastro(@RequestParam String email) {
 		service.reenviarSolicitacaoCadastro(email);
 	}
