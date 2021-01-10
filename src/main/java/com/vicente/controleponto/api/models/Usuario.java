@@ -1,6 +1,6 @@
 package com.vicente.controleponto.api.models;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PreUpdate;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -46,11 +48,8 @@ public class Usuario {
 	private Long id;
 	
 	@NotEmpty
-	@Size(min = 3, max = 150)
-	private String nome;
-	
-	@NotEmpty
 	@Email
+	@Size(min = 4, max = 150)
 	private String email;
 	
 	@Getter(onMethod = @__({@JsonIgnore}))
@@ -70,12 +69,19 @@ public class Usuario {
 	private List<Permissao> permissoes;
 	
 	@Column(insertable = false)
-	private Date dataInclusao;
+	private LocalDateTime dataInclusao;
 	
-	@Column(insertable = false)
-	private Date dataAlteracao;
+	private LocalDateTime dataAlteracao;
 	
 	@Column(insertable = false)
 	private Boolean ativo;
+	
+	@Column(insertable = false)
+	private Boolean cadastroAprovado;
+	
+	@PreUpdate
+	public void preUpdateEntity() {
+		dataAlteracao = LocalDateTime.now();
+	}
 
 }
