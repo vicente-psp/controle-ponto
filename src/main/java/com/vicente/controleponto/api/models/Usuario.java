@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.PreUpdate;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Email;
@@ -26,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.vicente.controleponto.api.models.enums.TipoUsuario;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -60,6 +60,7 @@ public class Usuario {
 	
 	@NotNull
 	@Enumerated(EnumType.STRING)
+	@ApiModelProperty(required = true, value = "ADM, COL, COM")
 	private TipoUsuario tipoUsuario;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
