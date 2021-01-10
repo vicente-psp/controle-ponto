@@ -1,5 +1,8 @@
 package com.vicente.controleponto.api.models;
 
+import java.time.LocalDateTime;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -42,5 +45,8 @@ public class SolicitacaoCadastro {
 	@NotEmpty
 	@Size(min = 50, max = 50)
 	private String secretKey;
+	
+	@Column(insertable = false)
+	private LocalDateTime dataSolicitacao;
 
 }
